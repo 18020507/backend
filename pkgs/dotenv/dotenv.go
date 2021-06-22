@@ -3,7 +3,7 @@ package dotenv
 import (
 	"log"
 	"os"
-
+	"fmt"
 	"github.com/joho/godotenv"
 )
 
@@ -25,7 +25,7 @@ func goDotEnvVariable(key string) string {
 
 func GetMySQL() string {
 	if mySqlUrl == "" {
-		mySqlUrl = goDotEnvVariable("MySql")
+		mySqlUrl = goDotEnvVariable("MYSQL")
 	}
 	return mySqlUrl
 }
