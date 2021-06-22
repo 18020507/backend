@@ -1,7 +1,7 @@
 package database
 
 import (
-	"database/sql"
+	"hieu/pkgs/connectDB"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -18,13 +18,7 @@ type MovieDetail struct {
 }
 
 func GetMovieDetail(id string) []*MovieDetail {
-	db, err := sql.Open("mysql", "root:anhvahieu2k@tcp(127.0.0.1:3306)/Cinema")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := connectDB.Connect()
 
 	res, err := db.Query("SELECT movies.id, movies.movie_name, movies.movie_time, movies.day_release, movies.movie_language, movies.producer, movies.short_description FROM movies WHERE movies.id = ?", id)
 

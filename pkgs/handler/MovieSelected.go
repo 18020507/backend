@@ -32,7 +32,4 @@ func MovieSelected(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	fmt.Fprintln(w, string(bb))
-
-	// w.WriteHeader(200)
-	// w.Write([]byte(strings.Join(key, ",")))
 }

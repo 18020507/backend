@@ -1,8 +1,8 @@
 package database
 
 import (
-	"database/sql"
 	"encoding/json"
+	"hieu/pkgs/connectDB"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -24,13 +24,7 @@ func (movies *Movies) String() string {
 }
 
 func GetMovie() []*Movies {
-	db, err := sql.Open("mysql", "root:anhvahieu2k@tcp(127.0.0.1:3306)/Cinema")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := connectDB.Connect()
 
 	res, err := db.Query("SELECT movies.id, movies.movie_name, movies.movie_time, movies.day_release, movie_types.id, movies.movie_type_id, movie_types.movie_type_name FROM movies INNER JOIN movie_types ON movies.movie_type_id = movie_types.id")
 

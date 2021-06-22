@@ -1,8 +1,8 @@
 package database
 
 import (
-	"database/sql"
 	"encoding/json"
+	"hieu/pkgs/connectDB"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -19,13 +19,7 @@ func (movID *MovieID) String() string {
 }
 
 func CreateShow(start, end, day_release, movie_selected string, movie_room int, movie_format string) {
-	db, err := sql.Open("mysql", "root:anhvahieu2k@tcp(127.0.0.1:3306)/Cinema")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := connectDB.Connect()
 
 	res, err := db.Query("SELECT movies.id, movies.movie_name FROM movies WHERE movies.movie_name = ?", movie_selected)
 

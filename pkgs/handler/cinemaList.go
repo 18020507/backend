@@ -9,7 +9,6 @@ import (
 
 func Cinema(w http.ResponseWriter, req *http.Request) {
 
-	// movie := database.GetMovie()
 	cinema := database.GetCinema()
 
 	bb, err := json.Marshal(cinema)

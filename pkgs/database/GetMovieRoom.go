@@ -1,7 +1,7 @@
 package database
 
 import (
-	"database/sql"
+	"hieu/pkgs/connectDB"
 	"log"
 	"strconv"
 
@@ -14,13 +14,7 @@ type Movie_Rooms struct {
 }
 
 func GetMovieRoom(cinema string) []*Movie_Rooms {
-	db, err := sql.Open("mysql", "root:anhvahieu2k@tcp(127.0.0.1:3306)/Cinema")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := connectDB.Connect()
 
 	id, err := strconv.Atoi(cinema)
 	if err != nil {

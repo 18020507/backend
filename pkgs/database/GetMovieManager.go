@@ -1,7 +1,7 @@
 package database
 
 import (
-	"database/sql"
+	"hieu/pkgs/connectDB"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -12,13 +12,7 @@ type Movie_Managers struct {
 }
 
 func GetMovieManager() []*Movie_Managers {
-	db, err := sql.Open("mysql", "root:anhvahieu2k@tcp(127.0.0.1:3306)/Cinema")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := connectDB.Connect()
 
 	res, err := db.Query("SELECT movies.movie_name FROM movies")
 
